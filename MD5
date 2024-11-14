@@ -1,0 +1,17 @@
+a0544f08c648737bbab7d069e06a3002 *DESCRIPTION
+e2789134415abf918fea9e19e61d8aa9 *NAMESPACE
+f45fdbde7e655475ca3ad3fd153b6c3b *R/PerRegMod.R
+b54db8794555342c4feee5fe0b1b8f5b *build/partial.rdb
+f655f3be31d0b28b015e259f2749eefc *inst/extdata/weather_data_casablanca_settat.xlsx
+549f7131c13464631302a1b6f2b888f8 *man/A_x_B.Rd
+a671814664806988afd0a5af3b4eaa6d *man/DELTA.Rd
+61211783daf6c57a3dfc0eeaec4f78fa *man/GAMMA.Rd
+6d45a959c280c59cbbcca3d0d0a83571 *man/LSE_Reg_per.Rd
+8da62cae03f5daf6cf6a8828b915e83a *man/check_periodicity.Rd
+51ac1a4bff72277e91f86994156d7282 *man/estimate_para_adaptive_method.Rd
+6c299eb3bc7a03d95fd112a907e21390 *man/lm_per.Rd
+b6678b6e234f798d09dc4eba22561aa8 *man/lm_per_AE.Rd
+4adf6fcc02bb11908c7c580df9512509 *man/phi_n.Rd
+cc04e16d825321ee809f91e2aa8380cd *man/pseudo_gaussian_test.Rd
+6df515bd03cc7648a21dc24df327ad90 *man/sd_estimation_for_each_s.Rd
+4b5b7367feb8b90e3ea24c993ecd3d00 *tests/test.R

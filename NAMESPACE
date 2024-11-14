@@ -1,0 +1,18 @@
+# Exported functions
+export(check_periodicity)
+export(lm_per)
+export(lm_per_AE)
+export(phi_n)
+export(pseudo_gaussian_test)
+export(sd_estimation_for_each_s)
+export(A_x_B)
+export(LSE_Reg_per)
+export(DELTA)
+export(GAMMA)
+export(estimate_para_adaptive_method)
+# Imported functions
+importFrom("stats", "pchisq")
+importFrom("stats", "quantile")
+importFrom("expm", "sqrtm")
+importFrom("readxl", "read_excel")
+importFrom("sn", "rsn")
