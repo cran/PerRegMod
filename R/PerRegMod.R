@@ -128,6 +128,7 @@ sd_estimation_for_each_s=function(x,y,s,beta_hat){
 lm_per=function(x,y,s){
   p=length(x)
   n=length(y)
+  m=n/s
   beta_hat=LSE_Reg_per(x,y,s=s)$beta
   sd=sd_estimation_for_each_s(x,y,s,beta_hat)
 
@@ -181,28 +182,51 @@ lm_per=function(x,y,s){
   row.names(newdata)=s_name
   newdata=data.frame(newdata,sd )
   RMSE=sqrt(mean(residuals^2) )
-  message("Residuals:\n")
-  message(quantile(residuals, probs = c(0, 0.25, 0.5, 0.75, 1)),digits = 5)
-  message("\n")
-  message("Coefficients:\n")
-  message(newdata, digits = 5)
-  message("\n")
-  message("Root mean square error: ", RMSE)
+  #####"""""""""""R^2
+  y_hat=rep(0,n)
+  for (i in 1:s) {
+    q=seq(i,n,s)
+    y_hat[q]=beta_hat[i]
+  }
+  for (j in 1:p) {
+    for (i in 1:s) {
+      q=seq(i,n,s)
+      y_hat[q]=y_hat[q]+beta_hat[i+j*s]*x[[j]][q]
+    }
+  }
+  sst=rep(0,s)
+  for (i in 1:s) {
+    q=seq(i,n,s)
+    sst[i]=sum((y[q]-mean(y[q]))^2)
+  }
+  sst_f=sum(sst)
+  R_squared_for_per=1-sum( (y-y_hat)^2)/sst_f
+  R_squared_adjusted_for_per=1-(sum( (y-y_hat)^2)/(m-p-1) )/(sst_f/(m-1) )
+  verbose=TRUE
+  if(verbose)cat("Residuals:\n")
+  if(verbose)print(quantile(residuals, probs = c(0, 0.25, 0.5, 0.75, 1)),digits = 5)
+  if(verbose)cat("\n")
+  if(verbose)cat("Coefficients:\n")
+  if(verbose)print(newdata, digits = 5)
+  if(verbose)cat("\n")
+  if(verbose)cat(paste("R-squared: ", round(R_squared_for_per,6),"Adjusted R-squared: ",round(R_squared_adjusted_for_per,6) ))
+  if(verbose)cat("\n")
+  if(verbose)cat("Root mean square error: ", RMSE)
+
 }
 
-#n=200
-#s=4
+########""""""""""
+#n=20
+#s=2
 #x1=rnorm(n,0,1)
 #x2=rnorm(n,0,2)
 #x3=rnorm(n,0,3)
 #x4=rnorm(n,0,2.7)
 #y=rnorm(n,0,2.5)
 #x=list(x1,x2,x3,x4)
-#beta_hat=LSE_Reg_per(x,y,s=s)$beta
-#m=n/s
-#p=4
+#beta_hat=LSE_R_p_p_multiple_p_3(x,y,s=s)$beta
 #sd_estimation_for_each_s(x,y,s,beta_hat)
-#lm_per(x,y,s)
+#lm_per_AE(x,y,s)
 
 ########""""""""""""""""""""""Adaptive method
 ########""""""""" define central sequence, Delta, for periodic regression model
@@ -387,7 +411,7 @@ GAMMA=function(x,phi,s,z,sigma){
 
 #phi_n<- function(z) { return(z)}
 phi_n<- function(x) {
-  b_n=0.2
+  b_n=0.002
   l=length(x)
   uu=0
   for (i in 1:l) {
@@ -495,9 +519,11 @@ estimate_para_adaptive_method=function(n,s,y,x){
 }
 #para_ad=estimate_para_adaptive_method(n=length(y),s,y,x)$beta_ad
 #########""""""""""""""""""""""""
+
 lm_per_AE=function(x,y,s){
   p=length(x)
   n=length(y)
+  m=n/s
   beta_hat=estimate_para_adaptive_method(n,s,y,x)$beta_ad
   sd_p=matrix(0,s,1)
   for (i in 1:s) {
@@ -554,30 +580,41 @@ lm_per_AE=function(x,y,s){
   row.names(newdata)=s_name
   newdata=data.frame(newdata,SD=sd_p )
   RMSE=sqrt(mean(residuals^2) )
+  #####"""""""""""
+  #y_hat=rep(0,n)
+  #for (i in 1:s) {
+  #  q=seq(i,n,s)
+  # y_hat[q]=beta_hat[i]
+  #}
+  #for (j in 1:p) {
+  # for (i in 1:s) {
+  #  q=seq(i,n,s)
+  # y_hat[q]=y_hat[q]+beta_hat[i+(j+1)*s]*x[[j]][q]
+  #}
+  #}
+  #sst=rep(0,s)
+  #for (i in 1:s) {
+  # q=seq(i,n,s)
+  #sst[i]=sum((y[q]-mean(y[q]))^2)
+  #}
+  #sst_f=sum(sst)
+  #R_squared_for_per=1-sum( (y-y_hat)^2)/sst_f
+  #R_squared_adjusted_for_per=1-(sum( (y-y_hat)^2)/(m-p-1) )/(sst_f/(m-1) )
+
+  verbose=TRUE
 
   #return(list(cat("Residuals:\n"),print(quantile(residuals, probs = c(0, 0.25, 0.5, 0.75, 1)), digits = 5),cat("\n"),cat("Coefficients:\n"),print(newdata, digits = 5),cat("\n"),cat("Root mean square error: ", RMSE)))
-  message("Residuals:\n")
-  message(quantile(residuals, probs = c(0, 0.25, 0.5, 0.75, 1)),digits = 5)
-  message("\n")
-  message("Coefficients:\n")
-  message(newdata, digits = 5)
-  message("\n")
-  message("Root mean square error: ", RMSE)
+  if(verbose)cat("Residuals:\n")
+  if(verbose)print(quantile(residuals, probs = c(0, 0.25, 0.5, 0.75, 1)),digits = 5)
+  if(verbose)cat("\n")
+  if(verbose)cat("Coefficients:\n")
+  if(verbose)print(newdata, digits = 5)
+  if(verbose)cat("\n")
+  #if(verbose)cat(paste("R-squared: ", round(R_squared_for_per,6),"Adjusted R-squared: ",round(R_squared_adjusted_for_per,6) ))
+  #if(verbose)cat("\n")
+  if(verbose)cat("Root mean square error: ", RMSE)
 
-  }
-
-########""""""""""
-#n=20
-#s=2
-#x1=rnorm(n,0,1)
-#x2=rnorm(n,0,2)
-#x3=rnorm(n,0,3)
-#x4=rnorm(n,0,2.7)
-#y=rnorm(n,0,2.5)
-#x=list(x1,x2,x3,x4)
-#beta_hat=LSE_R_p_p_multiple_p_3(x,y,s=s)$beta
-#sd_estimation_for_each_s(x,y,s,beta_hat)
-#lm_per_AE(x,y,s)
+}
 
 #######""""""""""""""""""#########"""""""""""""""""""""""" statistic test
 
@@ -818,10 +855,9 @@ check_periodicity=function(x,y,s){
   test=pseudo_gaussian_test(x,z,s)
   df=(s-1)*(p+2)
   p_value=1-pchisq(as.numeric(test) , df=df )
-  message("Chi-squared test for detecting periodicity of coefficients")
-  message("\n")
-  message("\n")
-  message("\n")
-  message(paste("Chi-squared statistic:",round(test,5)," on df=",df,", p-value: ",p_value ))
+  verbose=TRUE
+  if(verbose)cat("Chi-squared test for detecting periodicity of coefficients")
+  if(verbose)cat("\n")
+  if(verbose)cat(paste("Chi-squared statistic:",round(test,5)," on df=",df,", p-value: ",round(p_value,7) ))
 }
 

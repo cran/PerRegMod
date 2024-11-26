@@ -50,14 +50,14 @@ x3=runif(n,0,15)
 y=rep(0,n)
 for (i in 1:s) {
   q=seq(i,n,s)
-  y[q]=mu[i] + beta1[i] * x1[q] + beta2[i] * x2[q] + beta3[i] * x3[q] + rnorm(m,0,1)
+  y[q]=mu[i] + beta1[i] * x1[q] + beta2[i] * x2[q] + beta3[i] * x3[q] + rsn(m,alpha=10)
 }
 x=list(x1,x2,x3)
 lm_per(x,y,s)
 
 
 ##""""""""""""""""""""""" AE
-set.seed(4)
+set.seed(2)
 s=2
 n=200
 m=n/s
@@ -72,7 +72,7 @@ x3=runif(n,0,15)
 y=rep(0,n)
 for (i in 1:s) {
   q=seq(i,n,s)
-  y[q]=mu[i] + beta1[i] * x1[q] + beta2[i] * x2[q] + beta3[i] * x3[q] + rsn(m,alpha = 10)
+  y[q]=mu[i] + beta1[i] * x1[q] + beta2[i] * x2[q] + beta3[i] * x3[q] + rnorm(m,0,1)
 }
 x=list(x1,x2,x3)
 lm_per_AE(x,y,s)
