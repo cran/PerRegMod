@@ -1,6 +1,6 @@
-3a271d2074a46620c214411e53cdd9c9 *DESCRIPTION
+5199c96d4b723ff3bfa77b05883baabb *DESCRIPTION
 e2789134415abf918fea9e19e61d8aa9 *NAMESPACE
-61a5a44ceab23d6eca5e00402656b4a0 *R/PerRegMod.R
+ba39a2c0f469c7e8d320fb771890d4ad *R/PerRegMod.R
 b54db8794555342c4feee5fe0b1b8f5b *build/partial.rdb
 f655f3be31d0b28b015e259f2749eefc *inst/extdata/weather_data_casablanca_settat.xlsx
 549f7131c13464631302a1b6f2b888f8 *man/A_x_B.Rd
@@ -14,4 +14,4 @@ b6678b6e234f798d09dc4eba22561aa8 *man/lm_per_AE.Rd
 906ed6da183207d489626d191faaf404 *man/phi_n.Rd
 cc04e16d825321ee809f91e2aa8380cd *man/pseudo_gaussian_test.Rd
 6df515bd03cc7648a21dc24df327ad90 *man/sd_estimation_for_each_s.Rd
-431ecc4811fe0d0d09788e63a502aa60 *tests/test.R
+df36a37ffd74ca6c08917dd58a2282e1 *tests/test.R

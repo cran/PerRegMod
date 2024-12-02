@@ -21,7 +21,7 @@ library(readxl)
 library(sn)# for skew normal density
 
 
-
+set.seed(4)
 n=200
 s=2
 x1=rnorm(n,0,1)
@@ -52,9 +52,10 @@ for (i in 1:s) {
   q=seq(i,n,s)
   y[q]=mu[i] + beta1[i] * x1[q] + beta2[i] * x2[q] + beta3[i] * x3[q] + rsn(m,alpha=10)
 }
-x=list(x1,x2,x3)
+x=list(x1+x2+x3)
 lm_per(x,y,s)
-
+model=lm(y~x1+x2+x3)
+summary(model)
 
 ##""""""""""""""""""""""" AE
 set.seed(2)

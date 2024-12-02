@@ -2,7 +2,7 @@ Package: PerRegMod
 Type: Package
 Maintainer: Slimane Regui <slimaneregui111997@gmail.com>
 Title: Fitting Periodic Coefficients Linear Regression Models
-Version: 4.4.2
+Version: 4.4.3
 Authors@R: c(person(given = "Slimane", family = "Regui", email = "slimaneregui111997@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-3696-1300")),
              person(given = "Abdelhadi", family = "Akharif", role = c("aut")),
              person(given = "Amal", family = "Mellouk", role = c("aut")))
@@ -11,10 +11,10 @@ License: GPL
 Encoding: UTF-8
 Imports: expm, readxl, sn
 URL: https://doi.org/10.1080/03610918.2024.2314662
-Packaged: 2024-11-26 18:16:23 UTC; slima
+Packaged: 2024-12-02 11:32:39 UTC; slima
 NeedsCompilation: no
 Author: Slimane Regui [aut, cre] (<https://orcid.org/0000-0002-3696-1300>),
   Abdelhadi Akharif [aut],
   Amal Mellouk [aut]
 Repository: CRAN
-Date/Publication: 2024-11-26 18:40:02 UTC
+Date/Publication: 2024-12-02 15:50:05 UTC

@@ -171,7 +171,9 @@ lm_per=function(x,y,s){
   }
   newdata=as.data.frame(beta_hat_mat)
   names(newdata)=ceof
-  if(s==2){
+  if(s==1){
+    s_name=rbind("s= 1")
+  }else if(s==2){
     s_name=rbind("s= 1","s= 2")
   }else{
     s_name=rbind("s= 1","s= 2")
